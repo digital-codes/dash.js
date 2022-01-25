@@ -122,14 +122,14 @@ jobs:
             - build_unit_test_steps
             - functional_test_setup
             - run:
-                name: Run functional tests (chrome / https) only DRM
+                name: Run functional tests (chrome / https) DRM first VOD second
                 command:
-                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=edge --protocol=https --streams="DRM"
+                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=edge --protocol=https
             - run:
-                name: Run functional tests (chrome / http) only DRM
+                name: Run functional tests (chrome / http) DRM first VOD second
                 when: always # run tests even if some previous tests failed
                 command:
-                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=edge --protocol=http --streams="DRM"
+                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=edge --protocol=http
             - store_test_results:
                 path: test/functional/reports
 
