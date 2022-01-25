@@ -122,14 +122,14 @@ jobs:
             - build_unit_test_steps
             - functional_test_setup
             - run:
-                name: Run functional tests (chrome / https)
+                name: Run functional tests (chrome / https) only DRM
                 command:
-                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=edge --protocol=https
+                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=edge --protocol=https --streams="DRM"
             - run:
-                name: Run functional tests (chrome / http)
+                name: Run functional tests (chrome / http) only DRM
                 when: always # run tests even if some previous tests failed
                 command:
-                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=edge --protocol=http
+                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=edge --protocol=http --streams="DRM"
             - store_test_results:
                 path: test/functional/reports
 
@@ -137,24 +137,11 @@ workflows:
     version: 2
     commit-workflow:
         jobs:
-            - build-and-unit-test # run unit tests on feature branch
-            - merge-build-and-unit-test:  # run unit tests on virtually merged feature branch
-                filters:
-                    branches:
-                        ignore:
-                            - development # skiping redundant job if already on development
-                            - functional-tests
-            - functional-tests-smoke:
-                filters:
-                    branches:
-                        ignore: # as creds are available only for non-forked branches
-                            - /pull\/[0-9]+/
-                            - functional-tests
             - functional-tests-all:  # run unit tests on virtually merged feature branch
                   filters:
                       branches:
                           only:
-                              - functional-tests
+                              - functional-tests-vinay
 
     scheduled-workflow:
         triggers:
