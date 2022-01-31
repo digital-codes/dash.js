@@ -132,6 +132,8 @@ jobs:
                     node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=edge --protocol=http
             - store_test_results:
                 path: test/functional/reports
+        # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
+        resource_class: large
 
 workflows:
     version: 2
