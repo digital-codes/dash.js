@@ -115,6 +115,7 @@ jobs:
 
     functional-tests-all:
         executor: dashjs-executor
+        parallelism: 4
         steps:
             - functional_precondition
             - checkout
