@@ -215,14 +215,3 @@ workflows:
                           only:
                               - functional-tests-vinay
 
-    scheduled-workflow:
-        triggers:
-            - schedule:
-                cron: "0 0 * * 0"
-                filters:
-                    branches:
-                        only:
-                            - development
-        jobs:
-            - functional-tests-all
-
